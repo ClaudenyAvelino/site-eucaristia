@@ -53,6 +53,12 @@ a {
   font-weight: 500;
   background-color: #f9fbfd;
 }
+.card figcaption small {
+  display: block;
+  font-size: 12px;
+  color: #25d366;
+  margin-top: 4px;
+}
 
 /* FOOTER */
 footer {
