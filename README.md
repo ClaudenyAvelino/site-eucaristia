@@ -4,13 +4,13 @@
 
 ## 🔗 Link do Projeto
 Você pode acessar a aplicação online aqui:  
-👉 **[https://seu-endereco-do-site.com](https://seu-endereco-do-site.com)**
+👉 **[https://site-eucaristia.vercel.app](https://site-eucaristia.vercel.app/)**
 
 ---
 
 ## 🖥️ Visualização do Projeto
 
-![Preview da Galeria](./screenshot.png) 
+![Preview da Galeria](/img/aplicacao.png) 
 *(Legenda: Demonstração da interface responsiva da galeria)*
 
 ---
