@@ -4,205 +4,1256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eucaristia Capela de Nossa Senhora Aparecida</title>
+
+    <meta name="description" content="Galeria Eucaristia - Capela de Nossa Senhora Aparecida">
+
+    <title>Eucaristia - Capela de Nossa Senhora Aparecida</title>
+
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* =====================================================
+           PROTEÇÃO DA PÁGINA INICIAL
+           ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            font-family: Arial, sans-serif;
+        }
+
+        img {
+            -webkit-user-drag: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =====================================================
+           CABEÇALHO
+           ===================================================== */
+
+        header {
+            background-color: #1e3a5f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           GALERIA
+           ===================================================== */
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+
+        /* =====================================================
+           CARD
+           ===================================================== */
+
+        .card {
+            position: relative;
+            margin: 0;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        }
+
+
+        /* =====================================================
+           LINK DO CLIENTE
+           ===================================================== */
+
+        .cliente-link {
+            display: block;
+            position: relative;
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           IMAGEM
+           ===================================================== */
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+
+            pointer-events: none;
+
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+
+
+        /* =====================================================
+           CAMADA DE PROTEÇÃO
+           ===================================================== */
+
+        .image-protection {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            background: transparent;
+        }
+
+
+        /* =====================================================
+           MARCA D'ÁGUA
+           ===================================================== */
+
+        .watermark {
+            position: absolute;
+
+            z-index: 6;
+
+            top: 50%;
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%) rotate(-25deg);
+
+            width: 100%;
+
+            text-align: center;
+
+            color: rgba(255, 255, 255, 0.65);
+
+            font-size: clamp(18px, 3vw, 32px);
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            white-space: nowrap;
+
+            text-shadow:
+                1px 1px 3px rgba(0, 0, 0, 0.7);
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           NOME
+           ===================================================== */
+
+        .card figcaption {
+            position: relative;
+            z-index: 10;
+
+            padding: 12px;
+
+            font-size: 15px;
+
+            color: #1e3a5f;
+
+            font-weight: 600;
+
+            background-color: #f9fbfd;
+        }
+
+
+        .card figcaption small {
+            display: block;
+
+            font-size: 12px;
+
+            color: #25d366;
+
+            margin-top: 4px;
+        }
+
+
+        /* =====================================================
+           INDICAÇÃO
+           ===================================================== */
+
+        .acessar-galeria {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #0d6efd;
+
+            font-size: 12px;
+
+            font-weight: normal;
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        footer {
+            background-color: #d9dee3;
+
+            text-align: center;
+
+            padding: 20px;
+
+            font-size: 14px;
+
+            color: #333;
+        }
+
+        footer .social {
+            margin-top: 12px;
+        }
+
+        footer .social a {
+            margin: 0 12px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            color: #1e3a5f;
+
+            font-weight: 500;
+
+            transition:
+                transform 0.2s,
+                color 0.2s;
+        }
+
+        footer .social a:hover {
+            color: #0d6efd;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           WHATSAPP FLUTUANTE
+           ===================================================== */
+
+        .whatsapp-float {
+            position: fixed;
+
+            bottom: 20px;
+            right: 20px;
+
+            background-color: #25d366;
+
+            padding: 12px;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.2);
+
+            z-index: 1000;
+        }
+
+        .whatsapp-float img {
+            display: block;
+        }
+
+
+        /* =====================================================
+           MENSAGEM DE PROTEÇÃO
+           ===================================================== */
+
+        #protection-message {
+            position: fixed;
+
+            bottom: 20px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            background: rgba(0, 0, 0, 0.88);
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            z-index: 99999;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: opacity 0.3s ease;
+        }
+
+        #protection-message.show {
+            opacity: 1;
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+           ===================================================== */
+
+        @media (max-width: 1024px) {
+
+            .galeria {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 768px) {
+
+            .galeria {
+                grid-template-columns: repeat(2, 1fr);
+
+                gap: 15px;
+
+                padding: 15px;
+            }
+
+            header {
+                font-size: 21px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .galeria {
+                grid-template-columns: 1fr;
+
+                padding: 12px;
+            }
+
+            header {
+                font-size: 19px;
+            }
+
+        }
+    </style>
+
 </head>
+
 
 <body>
 
+    <!-- =====================================================
+         CABEÇALHO
+         ===================================================== -->
+
     <header>
-        Eucaristia Capela de Nossa Senhora Aparecida
+        Eucaristia<br>
+        <span style="font-size: 18px; font-weight: normal;">
+            Capela de Nossa Senhora Aparecida
+        </span>
     </header>
+
+
+    <!-- =====================================================
+         GALERIA DE CLIENTES
+         ===================================================== -->
 
     <section class="galeria">
 
-        <!-- Adryan (WHATSAPP) -->
+
+        <!-- =================================================
+             ADRYAN
+             ================================================= -->
+
         <figure class="card">
-            <a href="https://wa.me/5579998351182?text=Olá,%20gostaria%20de%20informações%20sobre%20Adryan."
-                target="_blank">
-                <img src="img/Adryan_MG_7488.jpg" alt="Adryan">
+
+            <a class="cliente-link" href="galeria.html?cliente=Adryan" target="_blank">
+
+                <img src="img/Adryan_MG_7488.jpg" alt="Adryan" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
                 <figcaption>
-                    Adryan<br>
-                    <small>Favor entrar em contato pelo WhatsApp</small>
+
+                    Adryan
+
+                    <small>
+                        Favor entrar em contato pelo WhatsApp
+                    </small>
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
                 </figcaption>
+
             </a>
+
         </figure>
 
-        <!-- Ana Beatriz -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgDy13QWK3wnSpVwA3uUnk_BATfvrx5EKk38KGcjaGMVg24?e=TLdy4d"
-                target="_blank">
-                <img src="img/Ana Beatriz_MG_9124.jpg" alt="Ana Beatriz">
-                <figcaption>Ana Beatriz</figcaption>
-            </a>
-        </figure>
 
-        <!-- Aylla -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgCwinMveZO_R51V2kjVXalrAQDwFRNXlDxeTKAaEmmdBZ8?e=3dcUzh"
-                target="_blank">
-                <img src="img/Aylla_MG_9067.jpg" alt="Aylla Sophia">
-                <figcaption>Aylla Sophia</figcaption>
-            </a>
-        </figure>
+        <!-- =================================================
+             ANA BEATRIZ
+             ================================================= -->
 
-        <!-- Eloá -->
         <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgDK0ZRqM_FSSZmN5d3eqhhuAcU0QWSk6-nZr33Xeak_2fc?e=UCu2Es"
-                target="_blank">
-                <img src="img/Eloá_MG_8941.jpg" alt="Eloá">
-                <figcaption>Eloá</figcaption>
-            </a>
-        </figure>
 
-        <!-- Isadora Santana -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgBn_LcE-lecSYMPzzS8M8AvAcq4MJg84yS0BrhHuJ06bNY?e=4d33Zm"
-                target="_blank">
-                <img src="img/Isadora Santana_MG_9454.jpg" alt="Isadora Santana">
-                <figcaption>Isadora Santana</figcaption>
-            </a>
-        </figure>
+            <a class="cliente-link" href="galeria.html?cliente=Ana%20Beatriz">
 
-        <!-- Isadora Santos -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgB3z0nNPETIQ7opUeM7f40JASuIUp5O-fh4cc2TdZgDpao?e=HWA4Rb"
-                target="_blank">
-                <img src="img/Isadora Santos_MG_8954.jpg" alt="Isadora Santos">
-                <figcaption>Isadora Santos</figcaption>
-            </a>
-        </figure>
+                <img src="img/Ana Beatriz_MG_9124.jpg" alt="Ana Beatriz" draggable="false">
 
-        <!-- Jean (WHATSAPP) -->
-        <figure class="card">
-            <a href="https://wa.me/5579998351182?text=Olá,%20gostaria%20de%20informações%20sobre%20Jean."
-                target="_blank">
-                <img src="img/Jean_MG_9264.jpg" alt="Jean">
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
                 <figcaption>
-                    Jean<br>
-                    <small>Favor entrar em contato pelo WhatsApp</small>
+
+                    Ana Beatriz
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
                 </figcaption>
+
             </a>
+
         </figure>
 
-        <!-- João Emanuel -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgCz_EEL5F1YTLjyTbCN8RsQAUozFvauy4HFY2AXgj0RBos?e=8Jf1hw"
-                target="_blank">
-                <img src="img/João Emanuel_MG_9094.jpg" alt="João Emanuel">
-                <figcaption>João Emanuel</figcaption>
-            </a>
-        </figure>
 
-        <!-- Larissa -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgCs9ptiLX-sS6YZMMlJpU4BATdxx52hdBa4NeQmM8yTdv4?e=Cd65ag"
-                target="_blank">
-                <img src="img/Larissa_MG_9030.jpg" alt="Larissa">
-                <figcaption>Larissa</figcaption>
-            </a>
-        </figure>
+        <!-- =================================================
+             AYLLA
+             ================================================= -->
 
-        <!-- Lohanny -->
         <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgCVHY8PnussT6eCRDkIb-f5AULVKiSL0VlHlfDKnaveDas?e=Lu0RrW"
-                target="_blank">
-                <img src="img/Lohanny_MG_9015.jpg" alt="Lohanny">
-                <figcaption>Lohanny</figcaption>
-            </a>
-        </figure>
 
-        <!-- Lorena -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgD6IAF03q2nRKQJ3A2RVAf5AXEgU0Q5ge32P_o4GMTWGvI?e=bzJkF5"
-                target="_blank">
-                <img src="img/Lorena_MG_8926.jpg" alt="Lorena">
-                <figcaption>Lorena</figcaption>
-            </a>
-        </figure>
+            <a class="cliente-link" href="galeria.html?cliente=Aylla%20Sophia">
 
-        <!-- Luna -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgACM5pyYRotR78RySPBwyTcAaTugKpqjZ51TGWgV88wWOM?e=LJ2v9w"
-                target="_blank">
-                <img src="img/Luna Alves_MG_8920.jpg" alt="Luna Alves">
-                <figcaption>Luna Alves</figcaption>
-            </a>
-        </figure>
+                <img src="img/Aylla_MG_9067.jpg" alt="Aylla Sophia" draggable="false">
 
-        <!-- Lívia -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgDlryYQulAySImR979n_DxdAWWCMqgVxFAuGAUgTWd0nLI?e=7OUcMf"
-                target="_blank">
-                <img src="img/Lívia_MG_8962.jpg" alt="Lívia Victória">
-                <figcaption>Lívia Victória</figcaption>
-            </a>
-        </figure>
+                <div class="image-protection"></div>
 
-        <!-- Márcio -->
-        <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgABmm57u8DmQbsP9KTVrBNVAafuYHaNKwu_IxMJknftiDo?e=8e6Ul4"
-                target="_blank">
-                <img src="img/Márcio_MG_8994.jpg" alt="Márcio Vitor">
-                <figcaption>Márcio Vitor</figcaption>
-            </a>
-        </figure>
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
 
-        <!-- Nayanny (WHATSAPP) -->
-        <figure class="card">
-            <a href="https://wa.me/5579998351182?text=Olá,%20gostaria%20de%20informações%20sobre%20Nayanny."
-                target="_blank">
-                <img src="img/Nayanny_MG_9218.jpg" alt="Nayanny">
                 <figcaption>
-                    Nayanny<br>
-                    <small>Favor entrar em contato pelo WhatsApp</small>
+
+                    Aylla Sophia
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
                 </figcaption>
+
             </a>
+
         </figure>
 
-        <!-- Pérola -->
+
+        <!-- =================================================
+             ELOÁ
+             ================================================= -->
+
         <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgC3zK911r5OQqiKTbz2Qt83AQcRRpoVjSs05yj_4FOnqgU?e=vvgG4g"
-                target="_blank">
-                <img src="img/Pérola_MG_9615.jpg" alt="Pérola">
-                <figcaption>Pérola</figcaption>
+
+            <a class="cliente-link" href="galeria.html?cliente=Eloá">
+
+                <img src="img/Eloá_MG_8941.jpg" alt="Eloá" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Eloá
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
             </a>
+
         </figure>
 
-        <!-- Scarllet -->
+
+        <!-- =================================================
+             ISADORA SANTANA
+             ================================================= -->
+
         <figure class="card">
-            <a href="https://1drv.ms/f/c/c939bce3230fd75c/IgDoNkgWkWWiQINspU_BYnfKAT04T0C7G4d3RnWPjweRwWI?e=rlMPJJ"
-                target="_blank">
-                <img src="img/Scarllet_MG_9651.jpg" alt="Scarllet">
-                <figcaption>Scarllet</figcaption>
+
+            <a class="cliente-link" href="galeria.html?cliente=Isadora%20Santana">
+
+                <img src="img/Isadora Santana_MG_9454.jpg" alt="Isadora Santana" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Isadora Santana
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
             </a>
+
         </figure>
+
+
+        <!-- =================================================
+             ISADORA SANTOS
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Isadora%20Santos">
+
+                <img src="img/Isadora Santos_MG_8954.jpg" alt="Isadora Santos" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Isadora Santos
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             JEAN
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Jean">
+
+                <img src="img/Jean_MG_9264.jpg" alt="Jean" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Jean
+
+                    <small>
+                        Favor entrar em contato pelo WhatsApp
+                    </small>
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             JOÃO EMANUEL
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=João%20Emanuel">
+
+                <img src="img/João Emanuel_MG_9094.jpg" alt="João Emanuel" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    João Emanuel
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             LARISSA
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Larissa">
+
+                <img src="img/Larissa_MG_9030.jpg" alt="Larissa" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Larissa
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             LOHANNY
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Lohanny">
+
+                <img src="img/Lohanny_MG_9015.jpg" alt="Lohanny" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Lohanny
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             LORENA
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Lorena">
+
+                <img src="img/Lorena_MG_8926.jpg" alt="Lorena" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Lorena
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             LUNA
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Luna%20Alves">
+
+                <img src="img/Luna Alves_MG_8920.jpg" alt="Luna Alves" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Luna Alves
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             LÍVIA
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Lívia%20Victória">
+
+                <img src="img/Lívia_MG_8962.jpg" alt="Lívia Victória" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Lívia Victória
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             MÁRCIO
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Márcio%20Vitor">
+
+                <img src="img/Márcio_MG_8994.jpg" alt="Márcio Vitor" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Márcio Vitor
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             NAYANNY
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Nayanny">
+
+                <img src="img/Nayanny_MG_9218.jpg" alt="Nayanny" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Nayanny
+
+                    <small>
+                        Favor entrar em contato pelo WhatsApp
+                    </small>
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             PÉROLA
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Pérola">
+
+                <img src="img/Pérola_MG_9615.jpg" alt="Pérola" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Pérola
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
+
+        <!-- =================================================
+             SCARLLET
+             ================================================= -->
+
+        <figure class="card">
+
+            <a class="cliente-link" href="galeria.html?cliente=Scarllet">
+
+                <img src="img/Scarllet_MG_9651.jpg" alt="Scarllet" draggable="false">
+
+                <div class="image-protection"></div>
+
+                <div class="watermark">
+                    STUDIO DIGITAL
+                </div>
+
+                <figcaption>
+
+                    Scarllet
+
+                    <span class="acessar-galeria">
+                        Clique para acessar a galeria
+                    </span>
+
+                </figcaption>
+
+            </a>
+
+        </figure>
+
 
     </section>
 
+
+    <!-- =====================================================
+         RODAPÉ
+         ===================================================== -->
+
     <footer>
-        <p>© <span id="ano"></span> studio digital produções artísticas</p>
+
+        <p>
+            © <span id="ano"></span>
+            studio digital produções artísticas
+        </p>
 
         <div class="social">
-            <a href="https://www.instagram.com/sd.producoes" target="_blank">
+
+            <a href="https://www.instagram.com/sd.producoes" target="_blank" rel="noopener noreferrer">
+
                 <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram">
+
                 Instagram
+
             </a>
 
-            <a href="https://wa.me/5579998351182?text=Olá,%20gostaria%20de%20mais%20informações." target="_blank">
+
+            <a href="https://wa.me/5579998351182?text=Olá,%20gostaria%20de%20mais%20informações." target="_blank"
+                rel="noopener noreferrer">
+
                 <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp">
+
                 WhatsApp
+
             </a>
+
         </div>
+
     </footer>
 
+
+    <!-- =====================================================
+         WHATSAPP FLUTUANTE
+         ===================================================== -->
+
     <a href="https://wa.me/5579998351182?text=Olá,%20gostaria%20de%20informações." class="whatsapp-float"
-        target="_blank">
+        target="_blank" rel="noopener noreferrer">
+
         <img src="https://cdn-icons-png.flaticon.com/32/733/733585.png" alt="WhatsApp">
+
     </a>
 
+
+    <!-- =====================================================
+         MENSAGEM
+         ===================================================== -->
+
+    <div id="protection-message">
+        Esta ação não está disponível nesta galeria.
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
     <script>
-        document.getElementById("ano").textContent = new Date().getFullYear();
+
+        /* =================================================
+           ANO
+           ================================================= */
+
+        document.getElementById("ano").textContent =
+            new Date().getFullYear();
+
+
+        /* =================================================
+           MENSAGEM
+           ================================================= */
+
+        function showProtectionMessage() {
+
+            const message =
+                document.getElementById("protection-message");
+
+            message.classList.add("show");
+
+            setTimeout(function () {
+
+                message.classList.remove("show");
+
+            }, 1800);
+
+        }
+
+
+        /* =================================================
+           BOTÃO DIREITO
+           ================================================= */
+
+        document.addEventListener(
+            "contextmenu",
+            function (event) {
+
+                event.preventDefault();
+
+                showProtectionMessage();
+
+            }
+        );
+
+
+        /* =================================================
+           ARRASTAR
+           ================================================= */
+
+        document.addEventListener(
+            "dragstart",
+            function (event) {
+
+                event.preventDefault();
+
+            }
+        );
+
+
+        /* =================================================
+           SELEÇÃO
+           ================================================= */
+
+        document.addEventListener(
+            "selectstart",
+            function (event) {
+
+                event.preventDefault();
+
+            }
+        );
+
+
+        /* =================================================
+           COPIAR
+           ================================================= */
+
+        document.addEventListener(
+            "copy",
+            function (event) {
+
+                event.preventDefault();
+
+                showProtectionMessage();
+
+            }
+        );
+
+
+        /* =================================================
+           CUT
+           ================================================= */
+
+        document.addEventListener(
+            "cut",
+            function (event) {
+
+                event.preventDefault();
+
+            }
+        );
+
+
+        /* =================================================
+           ATALHOS
+           ================================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                const key =
+                    event.key.toLowerCase();
+
+
+                /* PRINT SCREEN */
+
+                if (event.key === "PrintScreen") {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+
+                /* F12 */
+
+                if (event.key === "F12") {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+
+                /* CTRL + S */
+
+                if (
+                    event.ctrlKey &&
+                    key === "s"
+                ) {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+
+                /* CTRL + U */
+
+                if (
+                    event.ctrlKey &&
+                    key === "u"
+                ) {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+
+                /* CTRL + C */
+
+                if (
+                    event.ctrlKey &&
+                    key === "c"
+                ) {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+
+                /* CTRL + SHIFT + I */
+
+                if (
+                    event.ctrlKey &&
+                    event.shiftKey &&
+                    key === "i"
+                ) {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+
+                /* CTRL + SHIFT + J */
+
+                if (
+                    event.ctrlKey &&
+                    event.shiftKey &&
+                    key === "j"
+                ) {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+
+                /* CTRL + SHIFT + C */
+
+                if (
+                    event.ctrlKey &&
+                    event.shiftKey &&
+                    key === "c"
+                ) {
+
+                    event.preventDefault();
+
+                    showProtectionMessage();
+
+                    return;
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           ESCONDER AO PERDER FOCO
+           ================================================= */
+
+        document.addEventListener(
+            "visibilitychange",
+            function () {
+
+                if (document.hidden) {
+
+                    document.body.style.visibility =
+                        "hidden";
+
+                } else {
+
+                    document.body.style.visibility =
+                        "visible";
+
+                }
+
+            }
+        );
+
     </script>
 
 </body>
